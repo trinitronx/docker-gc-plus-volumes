@@ -11,6 +11,8 @@ fi
 # Run docker-gc + docker-cleanup-volumes
 docker-compose up
 ret=$?
+# Cleanup after these tools
 docker-compose rm -f -v
+docker rmi -f spotify/docker-gc martin/docker-cleanup-volumes
 
 exit $ret
