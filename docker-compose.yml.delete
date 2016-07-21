@@ -1,0 +1,14 @@
+gc:
+  image: spotify/docker-gc
+#  privileged: true
+  environment:
+  - GRACE_PERIOD_SECONDS=86400
+  volumes:
+  - /var/run/docker.sock:/var/run/docker.sock
+  - ./etc:/etc
+gc-volumes:
+  image: martin/docker-cleanup-volumes
+  volumes:
+  - /var/run/docker.sock:/var/run/docker.sock
+  - /var/lib/docker:/var/lib/docker
+
