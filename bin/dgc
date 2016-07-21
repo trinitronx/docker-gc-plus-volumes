@@ -1,18 +1,37 @@
-#!/bin/bash
+#!/bin/sh
 
-script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+script_dir="$( cd "$( dirname "$0" )" && pwd )"
+docker_bin="$(which docker)"
+docker_compose_bin="$(which docker-compose)"
 
-if [ -n "$1" ] && [[ "$1" == "--dry-run" ]]; then
+if [ -n "$1" -a "$1" = '--dry-run' ]; then
   (cd "${script_dir}/../" && ln -sf docker-compose.yml.dry_run docker-compose.yml)
 else
   (cd "${script_dir}/../" && ln -sf docker-compose.yml.delete docker-compose.yml)
 fi
 
+## Test for old docker-compose that does not support 'rm --all'
+## Support added in 1.7.0
+docker_compose_version=$(docker-compose --version | sed -e 's/[[:alpha:]|(|[:space:]]//g' -e 's/\-//g' | awk -F, '{ print $1 }')
+sorted_version_list="$(printf "1.7.0\n${docker_compose_version}" | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n)"
+
+if echo -n "$sorted_version_list" | head -n1 | grep -q '1\.7\.0'; then
+  # Version >= 1.7.0
+  all_flag='--all'
+else
+  # Version < 1.7.0
+  all_flag=''
+fi
+
+
 # Run docker-gc + docker-cleanup-volumes
-docker-compose up
+$docker_compose_bin up
 ret=$?
+
 # Cleanup after these tools
-docker-compose rm -f -v
-docker rmi -f spotify/docker-gc martin/docker-cleanup-volumes
+$docker_compose_bin rm -f -v $all_flag
+$docker_bin rmi -f spotify/docker-gc martin/docker-cleanup-volumes
+# Cleanup any new docker >= 1.9 dangling volumes
+$docker_bin volume ls -qf dangling=true | xargs -r $docker_bin volume rm
 
 exit $ret
