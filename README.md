@@ -18,6 +18,22 @@ The wrapper script only accepts a single argument:
  - **`--dry-run`**: Run both `docker-gc` and `docker-cleanup-volumes` in _**DRY RUN**_ mode.  Does not actually delete anything.
  - When run **WITHOUT** `--dry-run`, deletion occurs.
 
+## Docker
+
+To run the prebuilt Docker container:
+
+    docker run  --rm -v /var/lib/docker:/var/lib/docker \
+                     -v /var/run/docker.sock:/var/run/docker.sock \
+                     -v $(pwd)/etc:/etc \
+                trinitronx/dgc [--dry-run]
+
+Build
+=====
+
+To build this docker image:
+
+    docker build -t trinitronx/dgc .
+
 License
 =======
 
