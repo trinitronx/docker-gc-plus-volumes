@@ -1,0 +1,15 @@
+trinitronx/.*
+trinitronx/build-tools:.*
+trinitronx/ansible-base:.*
+returnpath/awscli:.*
+returnpath/lpass:.*
+returnpath/job-runner:.*
+returnpath/psql:.*
+banno/graphite-stresser:.*
+node:.*
+wildducktheories/y2j:latest
+quay.io/coreos/prometheus:.*
+quay.io/coreos/prometheus:0.19.2
+centos:centos7
+gcr.io/google-containers/fluentd-elasticsearch:1.18
+gcr.io/google-containers/fluentd-elasticsearch:.*

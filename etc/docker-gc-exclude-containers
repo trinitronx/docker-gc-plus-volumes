@@ -1,0 +1,2 @@
+trinitronx/jenkins-job-batch-git-clone
+gcr.io/google_containers/kube-cross:.*
