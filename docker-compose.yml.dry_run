@@ -3,6 +3,7 @@ gc:
 #  privileged: true
   environment:
   - GRACE_PERIOD_SECONDS=86400
+  - FORCE_IMAGE_REMOVAL=1
   - DRY_RUN=1
   volumes:
   - /var/run/docker.sock:/var/run/docker.sock
