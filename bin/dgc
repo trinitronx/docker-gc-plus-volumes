@@ -1,0 +1,16 @@
+#!/bin/bash
+
+script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+if [ -n "$1" ] && [[ "$1" == "--dry-run" ]]; then
+  (cd "${script_dir}/../" && ln -sf docker-compose.yml.dry_run docker-compose.yml)
+else
+  (cd "${script_dir}/../" && ln -sf docker-compose.yml.delete docker-compose.yml)
+fi
+
+# Run docker-gc + docker-cleanup-volumes
+docker-compose up
+ret=$?
+docker-compose rm -f -v
+
+exit $ret
