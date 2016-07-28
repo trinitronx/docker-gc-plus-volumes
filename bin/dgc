@@ -1,6 +1,6 @@
 #!/bin/sh
 
-script_dir="$( cd "$( dirname "$0" )" && pwd )"
+script_dir="$( cd "$( dirname "$(readlink "$0")" )" && pwd )"
 docker_bin="$(which docker)"
 docker_compose_bin="$(which docker-compose)"
 
@@ -25,11 +25,11 @@ fi
 
 
 # Run docker-gc + docker-cleanup-volumes
-$docker_compose_bin up
+(cd "${script_dir}/../" && $docker_compose_bin up)
 ret=$?
 
 # Cleanup after these tools
-$docker_compose_bin rm -f -v $all_flag
+(cd "${script_dir}/../" && $docker_compose_bin rm -f -v $all_flag)
 $docker_bin rmi -f spotify/docker-gc martin/docker-cleanup-volumes
 # Cleanup any new docker >= 1.9 dangling volumes
 $docker_bin volume ls -qf dangling=true | xargs -r $docker_bin volume rm
