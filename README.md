@@ -2,7 +2,7 @@
 ==============================
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/trinitronx/dgc.svg)](https://hub.docker.com/r/trinitronx/dgc)
-[![Docker Stars](https://img.shields.io/docker/stars/trinitronx/dgc.svg)](https://hub.docker.com/r/trinitronx/dgc)
+[![Docker Stars](https://img.shields.io/docker/stars/trinitronx/dgc.svg)](https://hub.docker.com/r/trinitronx/dgc) [![](https://images.microbadger.com/badges/image/trinitronx/dgc.svg)](https://microbadger.com/images/trinitronx/dgc "Get your own image badge on microbadger.com")
 [![GitHub Release](https://img.shields.io/github/release/trinitronx/docker-gc-plus-volumes.svg)](https://github.com/trinitronx/docker-gc-plus-volumes/releases)
 [![Gittip](http://img.shields.io/gittip/trinitronx.svg)](https://www.gittip.com/trinitronx)
 
@@ -53,3 +53,4 @@ Author:: James Cuzella ([@trinitronx][keybase-id])
 
 
 [keybase-id]: https://gist.github.com/trinitronx/aee110cbdf55e67185dc44272784e694
+ 
